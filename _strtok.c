@@ -2,7 +2,7 @@
 
 /**
  * _strtok - tokenizes a string and stores each token
- *	 in an array of strings
+ * in an array of strings
  * @str: string to tokenize
  * @delim: the delimeter by which strin is tokenized
  *

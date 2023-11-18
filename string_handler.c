@@ -6,15 +6,14 @@
  *
  * Return: the length/count of the string
  */
-int _strlen( char *s) {
-    int length = 0;
+int _strlen(char *s)
+{
+	int length = 0;
 
-    while (*s != '\0') {
-        length++;
-        s++;
-    }
+	for (; s[length] != '\0';)
+		length++;
 
-    return length;
+	return (length);
 }
 
 
@@ -27,19 +26,18 @@ int _strlen( char *s) {
  *
  * Return: the pointer to dest
  */
-char *_strcpy(char *dest,  char *src) {
-    if (!dest || !src) {
-        return NULL;
-    }
+char *_strcpy(char *dest, char *src)
+{
+	int i = 0;
 
-    int i = 0;
-    while (src[i] != '\0') {
-        dest[i] = src[i];
-        i++;
-    }
+	if (dest == NULL || src == NULL)
+		return (NULL);
 
-    dest[i] = '\0';
-    return dest;
+	for (i = 0; src[i] != '\0'; i++)
+		dest[i] = src[i];
+	dest[i] = '\0';
+
+	return (dest);
 }
 
 
@@ -51,29 +49,21 @@ char *_strcpy(char *dest,  char *src) {
  *
  * Return: a pointer to the resulting string dest
  */
-char *_strcat(char *dest, char *src) {
-    if (!dest || !src) {
-        return NULL;
-    }
+char *_strcat(char *dest, char *src)
+{
+	int i;
+	int length = 0;
 
-    int destLength = 0;
-    while (dest[destLength] != '\0') {
-        destLength++;
-    }
+	while (dest[length] != '\0')
+		length++;
+	dest[length] = '/';
+	length++;
 
-    // Append a path separator if the destination string doesn't already end with one
-    if (dest[destLength - 1] != '/') {
-        dest[destLength++] = '/';
-    }
+	for (i = 0; src[i] != '\0'; i++)
+		dest[length + i] = src[i];
+	dest[length + i] = '\0';
 
-    int i = 0;
-    while (src[i] != '\0') {
-        dest[destLength + i] = src[i];
-        i++;
-    }
-
-    dest[destLength + i] = '\0';
-    return dest;
+	return (dest);
 }
 
 /**
@@ -85,20 +75,19 @@ char *_strcat(char *dest, char *src) {
  * Return: 0, if s1 and s2 are equal, a -ve value if s1 < s2
  * or +ve value if s1 > s2
  */
-int _strcmp(const char *s1, const char *s2) {
-    while (*s1 != '\0' && *s2 != '\0') {
-        if (*s1 < *s2) {
-            return (*s1 - *s2);
-        } else if (*s1 > *s2) {
-            return (*s1 - *s2);
-        }
+int _strcmp(char *s1, char *s2)
+{
+	int i = 0;
 
-        s1++;
-        s2++;
-    }
-
-    // Handle the case where both strings reached the null terminator
-    return (*s1 - *s2);
+	while (s1[i] != '\0')
+	{
+		if (s1[i] < s2[i])
+			return (s1[i] - s2[i]);
+		else if (s1[i] > s2[i])
+			return (s1[i] - s2[i]);
+		i++;
+	}
+	return (0);
 }
 
 /**
@@ -108,19 +97,17 @@ int _strcmp(const char *s1, const char *s2) {
  * Return: duplicated string
  */
 
-char *_strdup(const char *str) {
-    if (!str) {
-        return NULL;
-    }
+char *_strdup(char *str)
+{
+	char *dup_str = malloc(_strlen(str) + 1);
+	int i = 0;
 
-    size_t strLen = strlen(str);
-    char *dupStr = malloc(strLen + 1);
-    if (!dupStr) {
-        return NULL;
-    }
+	while (str[i] != '\0')
+	{
+		dup_str[i] = str[i];
+		i++;
+	}
+	dup_str[i] = '\0';
 
-    memcpy(dupStr, str, strLen);
-    dupStr[strLen] = '\0';
-
-    return dupStr;
+	return (dup_str);
 }

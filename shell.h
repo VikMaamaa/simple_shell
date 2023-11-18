@@ -12,15 +12,15 @@
 
 extern char **environ;
 
-void sig_handler(int signum);
-void prompt_new(void);
+void signal_handler(int signum);
+void prompt(void);
 
 char **_strtok(char *str, char *delim);
 
-char **getNewPath(char **env);
-char *get_cmd(char *path, char *command);
-int execute_cmd(char **tokens, char *absolute_path, char *shell, char **env);
-void err_message(char **tokens, char *full_path, char *shell, size_t count);
+char **getPath(char **env);
+char *get_full_cmd(char *path, char *command);
+int exec_cmd(char **tokens, char *absolute_path, char *shell, char **env);
+void error_message(char **tokens, char *full_path, char *shell, size_t count);
 
 int child_process(char **tokens, char *absolute_path,
 		char *shell, char **env);
@@ -37,7 +37,7 @@ int _isdigit(char *num);
 int _atoi(char *s);
 
 void _EOF(char *buf);
-void lose_memory(char **buffer);
+void free_memory(char **buffer);
 void exit_shell(char **args, char *shell, size_t count, int exit_status);
 
 #endif
